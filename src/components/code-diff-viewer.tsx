@@ -3,6 +3,13 @@
 import { Check, Copy, X } from "lucide-react";
 import { useState } from "react";
 
+const SCROLL_AREA_CLASSNAME =
+    "p-6 overflow-x-auto " +
+    "[&::-webkit-scrollbar:horizontal]:h-[10px] " +
+    "[&::-webkit-scrollbar-track]:bg-slate-950/30 " +
+    "[&::-webkit-scrollbar-thumb]:bg-slate-400/30 [&::-webkit-scrollbar-thumb]:rounded-full " +
+    "[&::-webkit-scrollbar-thumb:hover]:bg-slate-400/50";
+
 interface CodeDiffViewerProps {
     title?: string;
     beforeCode?: string;
@@ -19,13 +26,6 @@ export default function CodeDiffViewer({
     fileName = "example.js",
 }: CodeDiffViewerProps) {
     const [copied, setCopied] = useState(false);
-
-    const scrollAreaClassName =
-        "p-6 overflow-x-auto " +
-        "[&::-webkit-scrollbar:horizontal]:h-[10px] " +
-        "[&::-webkit-scrollbar-track]:bg-slate-950/30 " +
-        "[&::-webkit-scrollbar-thumb]:bg-slate-400/30 [&::-webkit-scrollbar-thumb]:rounded-full " +
-        "[&::-webkit-scrollbar-thumb:hover]:bg-slate-400/50";
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(afterCode);
@@ -83,7 +83,7 @@ export default function CodeDiffViewer({
                             </span>
                         </div>
                     </div>
-                    <div className={scrollAreaClassName}>
+                    <div className={SCROLL_AREA_CLASSNAME}>
                         <pre className="text-sm min-w-full w-max">
                             {beforeLines.map((line, index) => (
                                 <div
@@ -115,7 +115,7 @@ export default function CodeDiffViewer({
                             </span>
                         </div>
                     </div>
-                    <div className={scrollAreaClassName}>
+                    <div className={SCROLL_AREA_CLASSNAME}>
                         <pre className="text-sm min-w-full w-max">
                             {afterLines.map((line, index) => (
                                 <div
