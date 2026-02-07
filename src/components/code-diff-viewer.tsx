@@ -3,6 +3,23 @@
 import { Check, Copy, X } from "lucide-react";
 import { useState } from "react";
 
+const CODE_SCROLL_CONTAINER_CLASSNAME = "p-6 overflow-x-auto";
+
+const CODE_SCROLLBAR_STYLE_CLASSNAME = [
+    "[scrollbar-width:thin]",
+    "[scrollbar-color:rgba(148,163,184,0.3)_rgba(2,6,23,0.3)]",
+    "[&::-webkit-scrollbar:horizontal]:h-[10px]",
+    "[&::-webkit-scrollbar-track]:bg-slate-950/30",
+    "[&::-webkit-scrollbar-thumb]:bg-slate-400/30",
+    "[&::-webkit-scrollbar-thumb]:rounded-full",
+    "[&::-webkit-scrollbar-thumb:hover]:bg-slate-400/50",
+].join(" ");
+
+const CODE_SCROLLBAR_CLASSNAME = [
+    CODE_SCROLL_CONTAINER_CLASSNAME,
+    CODE_SCROLLBAR_STYLE_CLASSNAME,
+].join(" ");
+
 interface CodeDiffViewerProps {
     title?: string;
     beforeCode?: string;
@@ -76,7 +93,7 @@ export default function CodeDiffViewer({
                             </span>
                         </div>
                     </div>
-                    <div className="p-6 overflow-x-auto">
+                    <div className={CODE_SCROLLBAR_CLASSNAME}>
                         <pre className="text-sm">
                             {beforeLines.map((line, index) => (
                                 <div
@@ -108,7 +125,7 @@ export default function CodeDiffViewer({
                             </span>
                         </div>
                     </div>
-                    <div className="p-6 overflow-x-auto">
+                    <div className={CODE_SCROLLBAR_CLASSNAME}>
                         <pre className="text-sm">
                             {afterLines.map((line, index) => (
                                 <div
