@@ -20,6 +20,13 @@ export default function CodeDiffViewer({
 }: CodeDiffViewerProps) {
     const [copied, setCopied] = useState(false);
 
+    const scrollAreaClassName =
+        "p-6 overflow-x-auto " +
+        "[&::-webkit-scrollbar:horizontal]:h-[10px] " +
+        "[&::-webkit-scrollbar-track]:bg-slate-950/30 " +
+        "[&::-webkit-scrollbar-thumb]:bg-slate-400/30 [&::-webkit-scrollbar-thumb]:rounded-full " +
+        "[&::-webkit-scrollbar-thumb:hover]:bg-slate-400/50";
+
     const copyToClipboard = () => {
         navigator.clipboard.writeText(afterCode);
         setCopied(true);
@@ -76,8 +83,8 @@ export default function CodeDiffViewer({
                             </span>
                         </div>
                     </div>
-                    <div className="p-6 overflow-x-auto">
-                        <pre className="text-sm">
+                    <div className={scrollAreaClassName}>
+                        <pre className="text-sm min-w-full w-max">
                             {beforeLines.map((line, index) => (
                                 <div
                                     key={index}
@@ -86,7 +93,7 @@ export default function CodeDiffViewer({
                                     <span className="text-red-500/60 font-mono text-xs min-w-[2rem] text-right select-none">
                                         {index + 1}
                                     </span>
-                                    <code className="text-red-200 font-mono">
+                                    <code className="text-red-200 font-mono whitespace-pre">
                                         {line || " "}
                                     </code>
                                 </div>
@@ -108,8 +115,8 @@ export default function CodeDiffViewer({
                             </span>
                         </div>
                     </div>
-                    <div className="p-6 overflow-x-auto">
-                        <pre className="text-sm">
+                    <div className={scrollAreaClassName}>
+                        <pre className="text-sm min-w-full w-max">
                             {afterLines.map((line, index) => (
                                 <div
                                     key={index}
@@ -118,7 +125,7 @@ export default function CodeDiffViewer({
                                     <span className="text-green-500/60 font-mono text-xs min-w-[2rem] text-right select-none">
                                         {index + 1}
                                     </span>
-                                    <code className="text-green-200 font-mono">
+                                    <code className="text-green-200 font-mono whitespace-pre">
                                         {line || " "}
                                     </code>
                                 </div>
