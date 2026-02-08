@@ -24,67 +24,52 @@ export default function ErrorAnalysisCard({
 
     const severityConfig = {
         critical: {
-            bg: "from-red-50 to-red-100/50",
-            border: "border-red-300",
-            icon: "bg-red-500",
-            text: "text-red-900",
-            badge: "bg-red-500 text-white",
+            bg: "bg-gray-900",
+            border: "border-gray-900",
+            badge: "bg-gray-900 text-white",
         },
         high: {
-            bg: "from-orange-50 to-orange-100/50",
-            border: "border-orange-300",
-            icon: "bg-orange-500",
-            text: "text-orange-900",
-            badge: "bg-orange-500 text-white",
+            bg: "bg-gray-800",
+            border: "border-gray-800",
+            badge: "bg-gray-800 text-white",
         },
         medium: {
-            bg: "from-yellow-50 to-yellow-100/50",
-            border: "border-yellow-300",
-            icon: "bg-yellow-500",
-            text: "text-yellow-900",
-            badge: "bg-yellow-500 text-white",
+            bg: "bg-gray-700",
+            border: "border-gray-700",
+            badge: "bg-gray-700 text-white",
         },
         low: {
-            bg: "from-blue-50 to-blue-100/50",
-            border: "border-blue-300",
-            icon: "bg-blue-500",
-            text: "text-blue-900",
-            badge: "bg-blue-500 text-white",
+            bg: "bg-gray-600",
+            border: "border-gray-600",
+            badge: "bg-gray-600 text-white",
         },
     };
 
     const config = severityConfig[severity];
 
     return (
-        <div
-            className={`max-w-3xl rounded-2xl shadow-2xl border-2 ${config.border} bg-gradient-to-br ${config.bg} overflow-hidden backdrop-blur-sm`}
-        >
-            <div className="p-8">
+        <div className="max-w-3xl rounded-lg shadow-sm border border-gray-200 bg-white overflow-hidden">
+            <div className="p-6">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-6">
                     <div className="flex items-start gap-4">
                         <div
-                            className={`${config.icon} p-3 rounded-xl shadow-lg flex-shrink-0`}
+                            className={`${config.bg} p-2.5 rounded-lg flex-shrink-0`}
                         >
-                            <AlertCircle
-                                className="w-7 h-7 text-white"
-                                strokeWidth={2.5}
-                            />
+                            <AlertCircle className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                            <div className="flex items-center gap-3 mb-2">
-                                <h2
-                                    className={`text-2xl font-black ${config.text} tracking-tight`}
-                                >
+                            <div className="flex items-center gap-3 mb-2 flex-wrap">
+                                <h2 className="text-xl font-semibold text-gray-900">
                                     {errorType}
                                 </h2>
                                 <span
-                                    className={`${config.badge} px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide`}
+                                    className={`${config.badge} px-2.5 py-1 rounded-md text-xs font-medium`}
                                 >
                                     {severity}
                                 </span>
                             </div>
-                            <p className="text-gray-700 font-mono text-sm bg-white/60 px-3 py-2 rounded-lg border border-gray-300">
+                            <p className="text-gray-600 font-mono text-sm bg-gray-50 px-3 py-2 rounded-md border border-gray-200">
                                 {detectedIn}
                             </p>
                         </div>
@@ -92,7 +77,7 @@ export default function ErrorAnalysisCard({
                 </div>
 
                 {/* Error Message */}
-                <div className="mb-8 p-5 bg-white/70 border-2 border-gray-300 rounded-xl shadow-inner">
+                <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
                     <p className="font-mono text-sm text-gray-900 leading-relaxed break-all">
                         {errorMessage}
                     </p>
@@ -100,21 +85,18 @@ export default function ErrorAnalysisCard({
 
                 {/* Possible Causes */}
                 {possibleCauses.length > 0 && (
-                    <div className="mb-8">
-                        <div className="flex items-center gap-2 mb-4">
-                            <Lightbulb
-                                className="w-5 h-5 text-amber-600"
-                                strokeWidth={2.5}
-                            />
-                            <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide">
+                    <div className="mb-6">
+                        <div className="flex items-center gap-2 mb-3">
+                            <Lightbulb className="w-4 h-4 text-gray-700" />
+                            <h3 className="text-sm font-medium text-gray-900">
                                 Possible Causes
                             </h3>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                             {possibleCauses.map((cause, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white/80 border-2 border-gray-300 rounded-xl p-4 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                                    className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors cursor-pointer"
                                     onClick={() =>
                                         setExpandedCause(
                                             expandedCause === index
@@ -124,12 +106,12 @@ export default function ErrorAnalysisCard({
                                     }
                                 >
                                     <div className="flex items-start gap-3">
-                                        <div className="w-7 h-7 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-                                            <span className="text-white font-black text-sm">
+                                        <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <span className="text-white font-medium text-xs">
                                                 {index + 1}
                                             </span>
                                         </div>
-                                        <p className="text-gray-800 font-medium leading-relaxed flex-1">
+                                        <p className="text-gray-700 text-sm leading-relaxed flex-1">
                                             {cause}
                                         </p>
                                     </div>
@@ -142,27 +124,21 @@ export default function ErrorAnalysisCard({
                 {/* Quick Fixes */}
                 {quickFixes.length > 0 && (
                     <div>
-                        <div className="flex items-center gap-2 mb-4">
-                            <Zap
-                                className="w-5 h-5 text-green-600"
-                                strokeWidth={2.5}
-                            />
-                            <h3 className="text-lg font-black text-gray-900 uppercase tracking-wide">
+                        <div className="flex items-center gap-2 mb-3">
+                            <Zap className="w-4 h-4 text-gray-700" />
+                            <h3 className="text-sm font-medium text-gray-900">
                                 Quick Fixes
                             </h3>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                             {quickFixes.map((fix, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-4 hover:shadow-lg transition-all duration-200 group"
+                                    className="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:bg-gray-100 transition-colors group"
                                 >
                                     <div className="flex items-start gap-3">
-                                        <CheckCircle2
-                                            className="w-6 h-6 text-green-600 flex-shrink-0 group-hover:scale-110 transition-transform"
-                                            strokeWidth={2.5}
-                                        />
-                                        <p className="text-gray-900 font-medium leading-relaxed">
+                                        <CheckCircle2 className="w-5 h-5 text-gray-700 flex-shrink-0 group-hover:text-gray-900 transition-colors" />
+                                        <p className="text-gray-700 text-sm leading-relaxed">
                                             {fix}
                                         </p>
                                     </div>
@@ -174,10 +150,8 @@ export default function ErrorAnalysisCard({
             </div>
 
             {/* Footer */}
-            <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-8 py-4">
-                <p className="text-gray-300 text-xs font-mono uppercase tracking-widest">
-                    DevDebug AI • Powered by Tambo
-                </p>
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                <p className="text-gray-500 text-xs font-mono">DevDebug AI</p>
             </div>
         </div>
     );

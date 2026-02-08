@@ -37,10 +37,10 @@ function TreeNode({
     return (
         <div className="select-none">
             <div
-                className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 group ${
+                className={`flex items-center gap-3 p-3 rounded-lg transition-colors border ${
                     node.hasIssue
-                        ? "bg-red-100 border-2 border-red-400 hover:bg-red-200"
-                        : "bg-gray-50 border-2 border-gray-300 hover:bg-gray-100"
+                        ? "bg-gray-50 border-gray-900 hover:bg-gray-100"
+                        : "bg-white border-gray-200 hover:bg-gray-50"
                 }`}
                 style={{ marginLeft: `${depth * 2}rem` }}
             >
@@ -50,51 +50,42 @@ function TreeNode({
                         className="flex-shrink-0"
                     >
                         {isExpanded ? (
-                            <ChevronDown
-                                className="w-5 h-5 text-gray-600"
-                                strokeWidth={3}
-                            />
+                            <ChevronDown className="w-4 h-4 text-gray-600" />
                         ) : (
-                            <ChevronRight
-                                className="w-5 h-5 text-gray-600"
-                                strokeWidth={3}
-                            />
+                            <ChevronRight className="w-4 h-4 text-gray-600" />
                         )}
                     </button>
                 )}
 
-                {!hasChildren && <div className="w-5" />}
+                {!hasChildren && <div className="w-4" />}
 
                 <div
-                    className={`p-2 rounded-lg ${
-                        node.hasIssue ? "bg-red-500" : "bg-blue-500"
+                    className={`p-2 rounded-md ${
+                        node.hasIssue ? "bg-gray-900" : "bg-gray-200"
                     }`}
                 >
-                    <Package className="w-5 h-5 text-white" strokeWidth={2.5} />
+                    <Package className={`w-4 h-4 ${node.hasIssue ? "text-white" : "text-gray-700"}`} />
                 </div>
 
                 <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-black text-gray-900 truncate">
+                        <span className="font-semibold text-gray-900 truncate">
                             {node.name}
                         </span>
-                        <span className="font-mono text-sm text-gray-600 bg-white px-2 py-1 rounded border border-gray-300">
+                        <span className="font-mono text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded border border-gray-200">
                             {node.version}
                         </span>
                         {node.hasIssue && (
-                            <div className="flex items-center gap-1 bg-red-500 text-white px-2 py-1 rounded-full">
-                                <AlertTriangle
-                                    className="w-4 h-4"
-                                    strokeWidth={2.5}
-                                />
-                                <span className="text-xs font-bold uppercase">
+                            <div className="flex items-center gap-1 bg-gray-900 text-white px-2 py-1 rounded-md">
+                                <AlertTriangle className="w-3 h-3" />
+                                <span className="text-xs font-medium">
                                     Issue
                                 </span>
                             </div>
                         )}
                     </div>
                     {node.issueDescription && (
-                        <p className="text-sm text-red-800 mt-1 font-medium">
+                        <p className="text-sm text-gray-700 mt-1">
                             {node.issueDescription}
                         </p>
                     )}
@@ -121,30 +112,27 @@ export default function DependencyTree({
     const issueCount = dependencies.filter((d) => d.hasIssue).length;
 
     return (
-        <div className="max-w-4xl bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl shadow-2xl overflow-hidden border-4 border-blue-500">
+        <div className="max-w-4xl bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6">
+            <div className="bg-white px-6 py-5 border-b border-gray-200">
                 <div className="flex items-start justify-between">
                     <div>
-                        <h2 className="text-white text-3xl font-black mb-2 tracking-tight">
+                        <h2 className="text-gray-900 text-2xl font-semibold mb-2">
                             {title}
                         </h2>
-                        <div className="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-lg">
-                            <Package
-                                className="w-5 h-5 text-white"
-                                strokeWidth={2.5}
-                            />
-                            <span className="text-white font-mono font-bold">
+                        <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-md border border-gray-200">
+                            <Package className="w-4 h-4 text-gray-700" />
+                            <span className="text-gray-900 font-mono text-sm">
                                 {rootPackage}
                             </span>
                         </div>
                     </div>
                     {issueCount > 0 && (
-                        <div className="bg-red-500 px-6 py-3 rounded-xl text-center">
-                            <div className="text-white text-4xl font-black">
+                        <div className="bg-gray-900 px-5 py-3 rounded-lg text-center">
+                            <div className="text-white text-3xl font-semibold">
                                 {issueCount}
                             </div>
-                            <div className="text-red-100 text-xs font-bold uppercase">
+                            <div className="text-gray-300 text-xs font-medium">
                                 Issues Found
                             </div>
                         </div>
@@ -152,10 +140,10 @@ export default function DependencyTree({
                 </div>
 
                 {problemDescription && (
-                    <div className="mt-4 bg-red-900/30 border-2 border-red-400 rounded-xl p-4">
+                    <div className="mt-4 bg-gray-50 border border-gray-300 rounded-lg p-4">
                         <div className="flex items-start gap-3">
-                            <AlertTriangle className="w-6 h-6 text-red-300 flex-shrink-0 mt-1" />
-                            <p className="text-red-100 font-medium leading-relaxed">
+                            <AlertTriangle className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
+                            <p className="text-gray-700 text-sm leading-relaxed">
                                 {problemDescription}
                             </p>
                         </div>
@@ -164,8 +152,8 @@ export default function DependencyTree({
             </div>
 
             {/* Tree */}
-            <div className="p-8">
-                <div className="space-y-3">
+            <div className="p-6">
+                <div className="space-y-2">
                     {dependencies.map((dep, index) => (
                         <TreeNode key={index} node={dep} />
                     ))}
@@ -173,8 +161,8 @@ export default function DependencyTree({
 
                 {dependencies.length === 0 && (
                     <div className="text-center py-12">
-                        <Package className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                        <p className="text-gray-600 font-medium">
+                        <Package className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                        <p className="text-gray-500 text-sm">
                             No dependencies to show
                         </p>
                     </div>
@@ -182,9 +170,9 @@ export default function DependencyTree({
             </div>
 
             {/* Footer */}
-            <div className="bg-gradient-to-r from-gray-900 to-gray-800 px-8 py-4 border-t-4 border-gray-700">
-                <p className="text-gray-400 text-xs font-mono uppercase tracking-widest">
-                    Dependency Tree Analyzer • DevDebug AI
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                <p className="text-gray-500 text-xs font-mono">
+                    Dependency Tree Analyzer
                 </p>
             </div>
         </div>

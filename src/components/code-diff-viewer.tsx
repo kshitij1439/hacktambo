@@ -30,26 +30,26 @@ export default function CodeDiffViewer({
     const afterLines = afterCode.split("\n");
 
     return (
-        <div className="max-w-5xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-2xl overflow-hidden border-4 border-slate-700">
+        <div className="max-w-5xl bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
             {/* Header */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 border-b-4 border-slate-700">
+            <div className="bg-white px-6 py-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h3 className="text-white text-xl font-black tracking-tight">
+                        <h3 className="text-gray-900 text-lg font-semibold">
                             {title}
                         </h3>
-                        <p className="text-indigo-200 text-sm font-mono mt-1">
+                        <p className="text-gray-500 text-sm font-mono mt-1">
                             {fileName}
                         </p>
                     </div>
                     <button
                         onClick={copyToClipboard}
-                        className="flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition-all duration-200 font-bold border-2 border-white/30"
+                        className="flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-md transition-colors text-sm font-medium"
                     >
                         {copied ? (
                             <>
                                 <Check className="w-4 h-4" />
-                                Copied!
+                                Copied
                             </>
                         ) : (
                             <>
@@ -62,17 +62,14 @@ export default function CodeDiffViewer({
             </div>
 
             {/* Code Comparison */}
-            <div className="grid md:grid-cols-2 divide-x-4 divide-slate-700">
+            <div className="grid md:grid-cols-2 divide-x divide-gray-200">
                 {/* Before */}
-                <div className="bg-red-950/30">
-                    <div className="bg-red-900/50 px-6 py-3 border-b-2 border-red-800/50">
+                <div className="bg-gray-50">
+                    <div className="bg-white px-6 py-3 border-b border-gray-200">
                         <div className="flex items-center gap-2">
-                            <X
-                                className="w-5 h-5 text-red-400"
-                                strokeWidth={3}
-                            />
-                            <span className="text-red-300 font-black text-sm uppercase tracking-wider">
-                                Before (Broken)
+                            <X className="w-4 h-4 text-gray-600" />
+                            <span className="text-gray-700 font-medium text-sm">
+                                Before
                             </span>
                         </div>
                     </div>
@@ -81,12 +78,12 @@ export default function CodeDiffViewer({
                             {beforeLines.map((line, index) => (
                                 <div
                                     key={index}
-                                    className="flex gap-4 hover:bg-red-900/20 transition-colors"
+                                    className="flex gap-4 hover:bg-gray-100 transition-colors"
                                 >
-                                    <span className="text-red-500/60 font-mono text-xs min-w-[2rem] text-right select-none">
+                                    <span className="text-gray-400 font-mono text-xs min-w-[2rem] text-right select-none">
                                         {index + 1}
                                     </span>
-                                    <code className="text-red-200 font-mono">
+                                    <code className="text-gray-700 font-mono">
                                         {line || " "}
                                     </code>
                                 </div>
@@ -96,15 +93,12 @@ export default function CodeDiffViewer({
                 </div>
 
                 {/* After */}
-                <div className="bg-green-950/30">
-                    <div className="bg-green-900/50 px-6 py-3 border-b-2 border-green-800/50">
+                <div className="bg-white">
+                    <div className="bg-white px-6 py-3 border-b border-gray-200">
                         <div className="flex items-center gap-2">
-                            <Check
-                                className="w-5 h-5 text-green-400"
-                                strokeWidth={3}
-                            />
-                            <span className="text-green-300 font-black text-sm uppercase tracking-wider">
-                                After (Fixed)
+                            <Check className="w-4 h-4 text-gray-600" />
+                            <span className="text-gray-700 font-medium text-sm">
+                                After
                             </span>
                         </div>
                     </div>
@@ -113,12 +107,12 @@ export default function CodeDiffViewer({
                             {afterLines.map((line, index) => (
                                 <div
                                     key={index}
-                                    className="flex gap-4 hover:bg-green-900/20 transition-colors"
+                                    className="flex gap-4 hover:bg-gray-50 transition-colors"
                                 >
-                                    <span className="text-green-500/60 font-mono text-xs min-w-[2rem] text-right select-none">
+                                    <span className="text-gray-400 font-mono text-xs min-w-[2rem] text-right select-none">
                                         {index + 1}
                                     </span>
-                                    <code className="text-green-200 font-mono">
+                                    <code className="text-gray-900 font-mono">
                                         {line || " "}
                                     </code>
                                 </div>
@@ -129,10 +123,12 @@ export default function CodeDiffViewer({
             </div>
 
             {/* Footer */}
-            <div className="bg-slate-950 px-6 py-3 border-t-4 border-slate-700">
-                <p className="text-slate-400 text-xs font-mono">
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                <p className="text-gray-500 text-xs font-mono">
                     Language:{" "}
-                    <span className="text-white font-bold">{language}</span>
+                    <span className="text-gray-900 font-medium">
+                        {language}
+                    </span>
                 </p>
             </div>
         </div>

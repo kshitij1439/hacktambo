@@ -26,22 +26,19 @@ export default function StackTraceAnalyzer({
     const [expandedFrame, setExpandedFrame] = useState<number | null>(0);
 
     return (
-        <div className="max-w-5xl bg-gradient-to-br from-red-950 via-orange-950 to-yellow-950 rounded-2xl shadow-2xl overflow-hidden border-4 border-red-600">
+        <div className="max-w-5xl bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
             {/* Header */}
-            <div className="bg-gradient-to-r from-red-600 via-orange-600 to-yellow-500 px-8 py-6">
+            <div className="bg-white px-6 py-5 border-b border-gray-200">
                 <div className="flex items-start gap-4">
-                    <div className="bg-white p-3 rounded-xl shadow-lg">
-                        <AlertOctagon
-                            className="w-8 h-8 text-red-600"
-                            strokeWidth={2.5}
-                        />
+                    <div className="bg-gray-100 p-2.5 rounded-lg border border-gray-200">
+                        <AlertOctagon className="w-6 h-6 text-gray-700" />
                     </div>
                     <div className="flex-1">
-                        <h2 className="text-white text-3xl font-black mb-2 tracking-tight">
+                        <h2 className="text-gray-900 text-2xl font-semibold mb-2">
                             Stack Trace Analysis
                         </h2>
-                        <div className="bg-red-900/50 border-2 border-red-400 rounded-lg px-4 py-3">
-                            <p className="text-red-100 font-mono text-sm leading-relaxed">
+                        <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3">
+                            <p className="text-gray-700 font-mono text-sm leading-relaxed">
                                 {errorMessage}
                             </p>
                         </div>
@@ -51,14 +48,14 @@ export default function StackTraceAnalyzer({
 
             {/* Root Cause */}
             {rootCause && (
-                <div className="bg-gradient-to-r from-orange-900/50 to-red-900/50 px-8 py-5 border-b-2 border-red-700">
+                <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
                     <div className="flex items-start gap-3">
-                        <Layers className="w-6 h-6 text-orange-300 flex-shrink-0 mt-1" />
+                        <Layers className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h3 className="text-orange-200 font-black text-sm uppercase tracking-wider mb-2">
+                            <h3 className="text-gray-900 font-medium text-sm mb-1">
                                 Root Cause Identified
                             </h3>
-                            <p className="text-orange-100 font-medium leading-relaxed">
+                            <p className="text-gray-700 text-sm leading-relaxed">
                                 {rootCause}
                             </p>
                         </div>
@@ -67,7 +64,7 @@ export default function StackTraceAnalyzer({
             )}
 
             {/* Stack Frames */}
-            <div className="p-8 space-y-3">
+            <div className="p-6 space-y-2">
                 {stackFrames.map((frame, index) => {
                     const isExpanded = expandedFrame === index;
                     const isHighlighted = frame.isHighlighted;
@@ -75,23 +72,23 @@ export default function StackTraceAnalyzer({
                     return (
                         <div
                             key={index}
-                            className={`rounded-xl overflow-hidden border-3 transition-all duration-300 ${
+                            className={`rounded-lg overflow-hidden border transition-all ${
                                 isHighlighted
-                                    ? "border-yellow-500 bg-yellow-900/30"
-                                    : "border-gray-700 bg-gray-900/50"
+                                    ? "border-gray-900 bg-gray-50"
+                                    : "border-gray-200 bg-white"
                             }`}
                         >
                             <button
                                 onClick={() =>
                                     setExpandedFrame(isExpanded ? null : index)
                                 }
-                                className="w-full px-6 py-4 flex items-center gap-4 hover:bg-white/5 transition-colors"
+                                className="w-full px-5 py-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
                             >
                                 <div
-                                    className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-sm ${
+                                    className={`w-7 h-7 rounded-full flex items-center justify-center font-medium text-sm ${
                                         isHighlighted
-                                            ? "bg-yellow-500 text-yellow-950"
-                                            : "bg-gray-700 text-gray-300"
+                                            ? "bg-gray-900 text-white"
+                                            : "bg-gray-200 text-gray-700"
                                     }`}
                                 >
                                     {index + 1}
@@ -99,40 +96,16 @@ export default function StackTraceAnalyzer({
 
                                 <div className="flex-1 text-left">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <FileCode
-                                            className={`w-4 h-4 ${
-                                                isHighlighted
-                                                    ? "text-yellow-400"
-                                                    : "text-gray-400"
-                                            }`}
-                                        />
-                                        <span
-                                            className={`font-mono font-bold ${
-                                                isHighlighted
-                                                    ? "text-yellow-200"
-                                                    : "text-gray-300"
-                                            }`}
-                                        >
+                                        <FileCode className="w-4 h-4 text-gray-600" />
+                                        <span className="font-mono font-medium text-gray-900">
                                             {frame.functionName}
                                         </span>
                                     </div>
                                     <div className="flex items-center gap-3 text-xs">
-                                        <span
-                                            className={`font-mono ${
-                                                isHighlighted
-                                                    ? "text-yellow-300"
-                                                    : "text-gray-400"
-                                            }`}
-                                        >
+                                        <span className="font-mono text-gray-600">
                                             {frame.fileName}
                                         </span>
-                                        <span
-                                            className={`px-2 py-1 rounded ${
-                                                isHighlighted
-                                                    ? "bg-yellow-500/30 text-yellow-200"
-                                                    : "bg-gray-700 text-gray-400"
-                                            } font-bold`}
-                                        >
+                                        <span className="px-2 py-1 rounded-md bg-gray-100 text-gray-700 font-medium border border-gray-200">
                                             Line {frame.lineNumber}
                                             {frame.columnNumber &&
                                                 `:${frame.columnNumber}`}
@@ -141,20 +114,20 @@ export default function StackTraceAnalyzer({
                                 </div>
 
                                 {isHighlighted && (
-                                    <div className="bg-yellow-500 text-yellow-950 px-3 py-1 rounded-full text-xs font-black uppercase">
+                                    <div className="bg-gray-900 text-white px-3 py-1 rounded-md text-xs font-medium">
                                         Error Origin
                                     </div>
                                 )}
                             </button>
 
                             {isExpanded && frame.context && (
-                                <div className="border-t-2 border-gray-700 bg-gray-950 px-6 py-4">
+                                <div className="border-t border-gray-200 bg-gray-50 px-5 py-4">
                                     <div className="mb-2">
-                                        <span className="text-gray-400 text-xs font-bold uppercase tracking-wider">
+                                        <span className="text-gray-600 text-xs font-medium">
                                             Context
                                         </span>
                                     </div>
-                                    <pre className="font-mono text-sm text-gray-300 overflow-x-auto">
+                                    <pre className="font-mono text-sm text-gray-900 overflow-x-auto">
                                         {frame.context}
                                     </pre>
                                 </div>
@@ -165,8 +138,8 @@ export default function StackTraceAnalyzer({
 
                 {stackFrames.length === 0 && (
                     <div className="text-center py-12">
-                        <Layers className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                        <p className="text-gray-400 font-medium">
+                        <Layers className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                        <p className="text-gray-500 text-sm">
                             No stack trace available
                         </p>
                     </div>
@@ -174,9 +147,9 @@ export default function StackTraceAnalyzer({
             </div>
 
             {/* Footer */}
-            <div className="bg-gradient-to-r from-gray-950 to-black px-8 py-4 border-t-4 border-red-900">
-                <p className="text-gray-500 text-xs font-mono uppercase tracking-widest">
-                    Stack Trace Analyzer • DevDebug AI
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                <p className="text-gray-500 text-xs font-mono">
+                    Stack Trace Analyzer
                 </p>
             </div>
         </div>

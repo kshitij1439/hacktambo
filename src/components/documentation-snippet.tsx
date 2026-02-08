@@ -20,29 +20,26 @@ export default function DocumentationSnippet({
     relatedTopics = [],
 }: DocumentationSnippetProps) {
     return (
-        <div className="max-w-3xl bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 rounded-2xl shadow-2xl overflow-hidden border-4 border-purple-500">
+        <div className="max-w-3xl bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
             {/* Header */}
-            <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 px-8 py-6">
+            <div className="bg-white px-6 py-5 border-b border-gray-200">
                 <div className="flex items-start gap-4">
-                    <div className="bg-white p-3 rounded-xl shadow-lg">
-                        <BookOpen
-                            className="w-8 h-8 text-purple-600"
-                            strokeWidth={2.5}
-                        />
+                    <div className="bg-gray-100 p-2.5 rounded-lg border border-gray-200">
+                        <BookOpen className="w-6 h-6 text-gray-700" />
                     </div>
                     <div className="flex-1">
-                        <h2 className="text-white text-2xl font-black mb-1 tracking-tight">
+                        <h2 className="text-gray-900 text-xl font-semibold mb-1">
                             {title}
                         </h2>
-                        <div className="flex items-center gap-2">
-                            <span className="text-purple-100 text-sm font-bold">
+                        <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-gray-600 text-sm">
                                 From: {source}
                             </span>
                             <a
                                 href={sourceUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-1 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-lg transition-all text-xs font-bold"
+                                className="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-md transition-colors text-xs font-medium border border-gray-200"
                             >
                                 View Source
                                 <ExternalLink className="w-3 h-3" />
@@ -53,23 +50,20 @@ export default function DocumentationSnippet({
             </div>
 
             {/* Relevance Badge */}
-            <div className="bg-gradient-to-r from-purple-100 to-pink-100 px-8 py-3 border-b-2 border-purple-300">
+            <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
                 <div className="flex items-center gap-2">
-                    <Search
-                        className="w-4 h-4 text-purple-700"
-                        strokeWidth={2.5}
-                    />
-                    <span className="text-purple-900 font-bold text-sm">
+                    <Search className="w-4 h-4 text-gray-600" />
+                    <span className="text-gray-700 text-sm font-medium">
                         {relevance}
                     </span>
                 </div>
             </div>
 
             {/* Content */}
-            <div className="p-8">
-                <div className="bg-white border-2 border-purple-300 rounded-xl p-6 shadow-inner">
+            <div className="p-6">
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-5">
                     <div className="prose prose-sm max-w-none">
-                        <p className="text-gray-800 leading-relaxed whitespace-pre-wrap font-medium">
+                        <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                             {snippet}
                         </p>
                     </div>
@@ -78,14 +72,14 @@ export default function DocumentationSnippet({
                 {/* Related Topics */}
                 {relatedTopics.length > 0 && (
                     <div className="mt-6">
-                        <h3 className="text-gray-900 font-black text-sm uppercase tracking-wider mb-3">
+                        <h3 className="text-gray-900 font-medium text-sm mb-3">
                             Related Topics
                         </h3>
                         <div className="flex flex-wrap gap-2">
                             {relatedTopics.map((topic, index) => (
                                 <span
                                     key={index}
-                                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold hover:shadow-lg transition-all cursor-pointer"
+                                    className="bg-gray-900 text-white px-3 py-1.5 rounded-md text-sm font-medium hover:bg-gray-800 transition-colors cursor-pointer"
                                 >
                                     {topic}
                                 </span>
@@ -96,9 +90,9 @@ export default function DocumentationSnippet({
             </div>
 
             {/* Footer */}
-            <div className="bg-gradient-to-r from-purple-900 to-pink-900 px-8 py-4">
-                <p className="text-purple-300 text-xs font-mono uppercase tracking-widest">
-                    Documentation Helper • DevDebug AI
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+                <p className="text-gray-500 text-xs font-mono">
+                    Documentation Helper
                 </p>
             </div>
         </div>
